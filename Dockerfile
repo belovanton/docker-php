@@ -14,8 +14,8 @@ RUN apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y 
 	apt-get -y install  \
 	php5.6-fpm php5.6-mysql php-apcu-bc\
 	ssmtp ca-certificates curl php5.6-curl php5.6-gd php5.6-intl php-pear php5.6-imagick \
-	php5.6-imap php5.6-mcrypt php5.6-memcache php5.6-ps php5.6-pspell php5.6-cli php5.6-dev \ 
-	php5.6-recode php5.6-sqlite php5.6-tidy php5.6-xmlrpc php5.6-xsl php5.6-xdebug wget pkg-config &&\
+	php5.6-imap php5.6-mbstring php5.6-geoip php5.6-mcrypt php5.6-memcache php5.6-ps php5.6-pspell php5.6-cli php5.6-dev \ 
+	php5.6-recode php5.6-sqlite php5.6-tidy php5.6-xmlrpc php5.6-xsl php5.6-xdebug php5.6-soap wget pkg-config &&\
         apt-get clean && \
         rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* /download/directory
 
@@ -32,7 +32,7 @@ RUN	wget http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-
 	tar xvfz ioncube_loaders_lin_x86-64.tar.gz &&\
 	rm ioncube_loaders_lin_x86-64.tar.gz &&\
 	echo ioncube/ioncube_loader_lin_${PHP_VERSION}.so `php-config --extension-dir` &&\
-	PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;") && \
+	PHP_VERSION=$(php5.6 -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;") && \
 	cp ioncube/ioncube_loader_lin_${PHP_VERSION}.so `php-config --extension-dir` && rm -rf ioncube && \
         echo zend_extension=`php-config --extension-dir`/ioncube_loader_lin_${PHP_VERSION}.so >> /etc/php/5.6/fpm/php.ini 	
 
